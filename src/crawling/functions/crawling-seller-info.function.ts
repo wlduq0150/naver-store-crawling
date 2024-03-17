@@ -28,7 +28,7 @@ export async function crawlingSellerInfo(page: Page, productIndex: number): Prom
 
     // 판매자 정보 버튼 클릭
     await page.click(SMART_STORE_SELLER_BTN);
-    await waitForSeconds(0.5);
+    await waitForSeconds(1);
 
     let content = await page.content();
     let root = cheerio.load(content);

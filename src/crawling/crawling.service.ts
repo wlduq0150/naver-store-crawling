@@ -19,7 +19,7 @@ export class CrawlingService {
         private readonly sellerService: SellerService,
     ) {}
 
-    async crawlingSmartStore(crawlingStoreOption: CrawlingStoreOption): Promise<ISeller[]> {
+    async crawlingSmartStore(crawlingStoreOption: CrawlingStoreOption): Promise<number[]> {
         let { catId, pageIndex, productIndex, num } = crawlingStoreOption;
 
         const browser = await puppeteer.launch({
@@ -41,15 +41,12 @@ export class CrawlingService {
         await naverPageLogin(page, id, pw);
 
         // 개수만큼 판매자 데이터 크롤링
-        const sellers = await this.crawlSellerForNum(page, catId, pageIndex, productIndex, num);
-
-        // 크롤링 데이터 저장
-        this.saveSellerData(sellers);
+        const result = await this.crawlSellerForNum(page, catId, pageIndex, productIndex, num);
 
         page.close();
         browser.close();
 
-        return sellers;
+        return result;
     }
 
     // 판매자 데이터 크롤링
@@ -59,9 +56,7 @@ export class CrawlingService {
         pageIndex: number,
         productIndex: number,
         num: number,
-    ): Promise<ISeller[]> {
-        const sellers: ISeller[] = [];
-
+    ): Promise<number[]> {
         let cnt = 0;
         while (cnt < num) {
             try {
@@ -87,8 +82,10 @@ export class CrawlingService {
                 // 판매자 상세정보 크롤링
                 const sellerDetail = await crawlingSellerDetail(page, sellerInfo.store_site);
                 const seller: ISeller = { ...sellerInfo, ...sellerDetail };
-                sellers.push(seller);
                 cnt++;
+
+                // 크롤링 데이터 저장
+                this.sellerService.saveSeller(seller);
 
                 if (productIndex > 46) {
                     pageIndex++;
@@ -100,14 +97,7 @@ export class CrawlingService {
             }
         }
 
-        return sellers;
-    }
-
-    // 크롤링 데이터 저장
-    saveSellerData(sellers: ISeller[]) {
-        sellers.map((seller) => {
-            this.sellerService.saveSeller(seller);
-        });
+        return [pageIndex, productIndex];
     }
 
     // 상품 순서를 selector로 변환
