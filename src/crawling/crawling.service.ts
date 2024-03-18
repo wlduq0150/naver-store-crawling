@@ -33,7 +33,7 @@ export class CrawlingService {
             width: CRAWLING_WIDTH,
             height: CRAWLING_HEIGHT,
         });
-        await page.setDefaultTimeout(3000);
+        await page.setDefaultTimeout(5000);
 
         // 네이버 로그인(판매자 정보 크롤링을 위해 필요)
         const id = this.configService.get("NAVER_ID");
@@ -69,8 +69,8 @@ export class CrawlingService {
                 await infiniteScroll(page);
 
                 // 판매자 정보 크롤링
-                const sellerInfo = await crawlingSellerInfo(page, productIndex);
                 productIndex++;
+                const sellerInfo = await crawlingSellerInfo(page, productIndex);
 
                 // null일 경우 건너뛰기
                 if (!sellerInfo) continue;
