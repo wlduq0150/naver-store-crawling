@@ -24,7 +24,7 @@ export class CrawlingService {
 
         const browser = await puppeteer.launch({
             headless: process.env.NODE_ENV === "development" ? false : true,
-            // args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 
@@ -108,7 +108,7 @@ export class CrawlingService {
 
         const browser = await puppeteer.launch({
             headless: process.env.NODE_ENV === "development" ? false : true,
-            // args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 
