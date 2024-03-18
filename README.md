@@ -5,6 +5,7 @@
 ## 환경변수
 
 ```bash
+# .development.env 또는 .production.env 으로 파일명 저장
 SERVER_PORT=서버포트
 DATABASE_HOST=DB호스트
 DATABASE_PORT=DB포트
@@ -21,9 +22,11 @@ NAVER_PW=네이버 비밀번호
 $ npm install
 
 # development mode
+# .development.env 필요
 $ npm run start:dev
 
 # production mode
+# .production.env 필요
 $ npm run start:prod
 ```
 
