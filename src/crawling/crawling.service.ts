@@ -68,8 +68,14 @@ export class CrawlingService {
                 // 무한 스크롤링 방지
                 await infiniteScroll(page);
 
-                // 판매자 정보 크롤링
+                // 페이지네이션
                 productIndex++;
+                if (productIndex > 46) {
+                    pageIndex++;
+                    productIndex = 1;
+                }
+
+                // 판매자 정보 크롤링
                 const sellerInfo = await crawlingSellerInfo(page, productIndex);
 
                 // null일 경우 건너뛰기
@@ -88,11 +94,6 @@ export class CrawlingService {
                 if (!result) continue;
 
                 cnt++;
-
-                if (productIndex > 46) {
-                    pageIndex++;
-                    productIndex = 1;
-                }
             } catch (e) {
                 console.log(e);
                 continue;
