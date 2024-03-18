@@ -27,7 +27,7 @@ $ npm run start:dev
 
 # production mode
 # .production.env 필요
-$ npm run start:prod
+$ npm run start
 ```
 
 ## 🚀 시연 영상
