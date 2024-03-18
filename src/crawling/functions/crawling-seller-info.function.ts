@@ -19,6 +19,7 @@ export async function crawlingSellerInfo(page: Page, productIndex: number): Prom
     // 상품 순서를 통해 selector 가져오기
     const SMART_STORE_TARGET = getSelectorForIndex(productIndex);
     const SMART_STORE_SELLER_BTN = SMART_STORE_TARGET + " > " + SMART_STORE_INFO_BTN;
+
     // 쇼핑몰 정보가 없을 경우 예외처리
     try {
         await page.waitForSelector(SMART_STORE_SELLER_BTN, { timeout: 3000 });

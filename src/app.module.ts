@@ -4,11 +4,10 @@ import { AppService } from "./app.service";
 import { SetConfigModule } from "./config/config.module";
 import { CrawlingModule } from "./crawling/crawling.module";
 import { SequelizeConnectModule } from "./sequelize-connect/sequelize-connect.module";
-import { CategoryModule } from './category/category.module';
-import { SellerModule } from './seller/seller.module';
+import { SellerModule } from "./seller/seller.module";
 
 @Module({
-    imports: [SetConfigModule, CrawlingModule, SequelizeConnectModule.forRoot(), CategoryModule, SellerModule],
+    imports: [SetConfigModule, CrawlingModule, SequelizeConnectModule.forRoot(), SellerModule],
     controllers: [AppController],
     providers: [AppService],
 })

@@ -62,7 +62,7 @@ export class CrawlingService {
             try {
                 // 페이지 이동
                 const pageUrl = this.getUrlForOption(catId, pageIndex);
-                await page.goto(pageUrl);
+                await page.goto(pageUrl, { timeout: 5000 });
                 await page.waitForSelector(SMART_STORE_PAGE_LOADING);
 
                 // 무한 스크롤링 방지
@@ -82,10 +82,12 @@ export class CrawlingService {
                 // 판매자 상세정보 크롤링
                 const sellerDetail = await crawlingSellerDetail(page, sellerInfo.store_site);
                 const seller: ISeller = { ...sellerInfo, ...sellerDetail };
-                cnt++;
 
                 // 크롤링 데이터 저장
-                this.sellerService.saveSeller(seller);
+                const result = await this.sellerService.saveSeller(seller);
+                if (!result) continue;
+
+                cnt++;
 
                 if (productIndex > 46) {
                     pageIndex++;
@@ -98,6 +100,26 @@ export class CrawlingService {
         }
 
         return [pageIndex, productIndex];
+    }
+
+    async updateSmartStore(id: number) {
+        // DB에서 판매자 불러오기
+        const store = await this.sellerService.findOneById(id);
+
+        const browser = await puppeteer.launch({
+            headless: process.env.NODE_ENV === "development" ? false : true,
+            // args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+        const page = await browser.newPage();
+
+        // 판매자 상세 데이터 크롤링
+        const sellerDetail = await crawlingSellerDetail(page, store.store_site);
+
+        // 판매자 데이터 DB 업데이트
+        this.sellerService.updateSeller(id, sellerDetail);
+
+        page.close();
+        browser.close();
     }
 
     // 상품 순서를 selector로 변환
