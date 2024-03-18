@@ -1,73 +1,87 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h2>💡 프로젝트 소개</h2>
+👉 <a href="https://www.canva.com/design/DAF_1PSgIGw/o8iQPLmEfG_D12j0NnGT2w/edit"><span> 프로젝트 상세 보러가기 </span></a> 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 환경변수
 
-## Description
+```bash
+SERVER_PORT=서버포트
+DATABASE_HOST=DB호스트
+DATABASE_PORT=DB포트
+DATABASE_USERNAME=DB사용자이름
+DATABASE_PASSWORD=DB비밀번호
+DATABASE_NAME=DB이름
+NAVER_ID=네이버아이디
+NAVER_PW=네이버 비밀번호
+```
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+## 실행
 
 ```bash
 $ npm install
-```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
+# development mode
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
 ```
 
-## Test
+## 🚀 시연 영상
+<div>
+    👉 <a href="https://youtu.be/t4AIPBnHs5Q"><span> 시연 영상 보러가기 </span></a> 
+</div>
 
-```bash
-# unit tests
-$ npm run test
+<br>
+<br>
 
-# e2e tests
-$ npm run test:e2e
+## 🧑🏻‍💻 주요 기술 스택
 
-# test coverage
-$ npm run test:cov
-```
+<!-- 프로젝트에 사용된 기술 스택을 나열 -->
 
-## Support
+### ⚡ Backend
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<div dir="auto">
+    <img src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white">
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+    <img src="https://img.shields.io/badge/Sequelize-000000?style=for-the-badge&logo=sequelize&logoColor=white">
+</div>
 
-## Stay in touch
+### ⚡ Database
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<div dir="auto">
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+    <img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white">
+</div>
 
-## License
+### ⚡ DevOps
 
-Nest is [MIT licensed](LICENSE).
+<div dir="auto">
+    <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
+</div>
+
+### ⚡ 버전 관리
+
+<div dir="auto">
+    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
+</div>
+
+<br>
+<br>
+
+## 🪄 주요 기능
+
+1. **네이버 스마트 스토어 크롤링**
+
+    - 네이버 로그인
+    - 무한스크롤 방지
+    - 페이지네이션 방지
+
+2. **옵션을 통한 판매자 조회**
+
+    - 성별, 연령대, 지역 등 다양한 조건들을 통해 판매자 조회
+
+<br>
+<br>
