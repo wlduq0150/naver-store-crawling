@@ -1,7 +1,6 @@
 
 <h2>💡 프로젝트 소개</h2>
-👉 <a href="https://www.canva.com/design/DAF_1PSgIGw/o8iQPLmEfG_D12j0NnGT2w/edit"><span> 프로젝트 상세 보러가기 </span></a> 
-
+👉 <a href="https://www.canva.com/design/DAF_1PSgIGw/_KTl7LOJ-RaJhIG-QpG3UA/view?utm_content=DAF_1PSgIGw&utm_campaign=designshare&utm_medium=link&utm_source=editor"><span> 프로젝트 상세 보러가기 </span></a> 
 ## 환경변수
 
 ```bash
