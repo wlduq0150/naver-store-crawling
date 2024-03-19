@@ -4,8 +4,10 @@ import {
     SMART_STORE_ADDRESS,
     SMART_STORE_BUISNESS_NUMBER,
     SMART_STORE_CATEGORY,
+    SMART_STORE_CATEGORY_AD,
     SMART_STORE_CLOSE_BTN,
     SMART_STORE_INFO_BTN,
+    SMART_STORE_INFO_BTN_AD,
     SMART_STORE_PAGE_LOADING,
     SMART_STORE_SHOP_NAME,
     SMART_STORE_SITE,
@@ -19,16 +21,26 @@ export async function crawlingSellerInfo(page: Page, productIndex: number): Prom
     // 상품 순서를 통해 selector 가져오기
     const SMART_STORE_TARGET = getSelectorForIndex(productIndex);
     const SMART_STORE_SELLER_BTN = SMART_STORE_TARGET + " > " + SMART_STORE_INFO_BTN;
+    const SMART_STORE_SELLER_BTN_AD = SMART_STORE_TARGET + " > " + SMART_STORE_INFO_BTN_AD;
+
+    let isExistInfoBtn: string = null;
 
     // 쇼핑몰 정보가 없을 경우 예외처리
     try {
         await page.waitForSelector(SMART_STORE_SELLER_BTN, { timeout: 3000 });
-    } catch (e) {
-        return null;
-    }
+        isExistInfoBtn = SMART_STORE_SELLER_BTN;
+    } catch (e) {}
+
+    // 쇼핑몰 정보가 없을 경우 예외처리(AD)
+    try {
+        await page.waitForSelector(SMART_STORE_SELLER_BTN_AD, { timeout: 3000 });
+        isExistInfoBtn = SMART_STORE_SELLER_BTN_AD;
+    } catch (e) {}
+
+    if (!isExistInfoBtn) return null;
 
     // 판매자 정보 버튼 클릭
-    await page.click(SMART_STORE_SELLER_BTN);
+    await page.click(isExistInfoBtn);
     await waitForSeconds(1);
 
     let content = await page.content();
@@ -42,7 +54,7 @@ export async function crawlingSellerInfo(page: Page, productIndex: number): Prom
     // 판매자 정보 크롤링
     const category = parseCategoryFromContent(root, SMART_STORE_TARGET);
     const store_site_default = parseStoreSiteFromContent(root, SMART_STORE_TARGET);
-    const store_site_ad = parseStoreSiteADFromContent(root, SMART_STORE_SITE_AD);
+    const store_site_ad = parseStoreSiteADFromContent(root, SMART_STORE_TARGET);
     const store_site = await parseStoreSiteFromLink(page, store_site_default, store_site_ad);
     const shop_name = parseShopNameFromContent(root);
     const address = parseAddressFromContent(root);
@@ -89,7 +101,8 @@ function parseBusinessNumberFromContent($: cheerio.Root): string {
 // 쇼핑몰 분류 파싱
 function parseCategoryFromContent($: cheerio.Root, targetSelector: string): string {
     const target = $(targetSelector + " > " + SMART_STORE_CATEGORY);
-    const category = target.text();
+    const target_ad = $(targetSelector + " > " + SMART_STORE_CATEGORY_AD);
+    const category = target.text() ? target.text() : target_ad.text();
 
     return category;
 }
@@ -104,7 +117,7 @@ function parseStoreSiteFromContent($: cheerio.Root, targetSelector: string): str
 
 // 쇼핑몰 링크 AD 파싱
 function parseStoreSiteADFromContent($: cheerio.Root, targetSelector: string): string {
-    const target = $(targetSelector + " > " + SMART_STORE_SITE);
+    const target = $(targetSelector + " > " + SMART_STORE_SITE_AD);
     const store_site_ad = target.attr("href");
 
     return store_site_ad;
@@ -119,7 +132,7 @@ async function parseStoreSiteFromLink(
     const site = site_default ? site_default : site_ad;
 
     await page.goto(site, { timeout: 10000 });
-    const store_site = page.url().split("?").shift();
+    const store_site = page.url().split("?").shift().split("/products").shift();
     await page.goBack();
     await page.waitForSelector(SMART_STORE_PAGE_LOADING);
 

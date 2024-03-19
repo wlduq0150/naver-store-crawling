@@ -16,6 +16,7 @@ import { SellerDetail } from "../interfaces/crawling.interface";
 export async function crawlingSellerDetail(page: Page, storeSite: string): Promise<SellerDetail> {
     // 페이지 이동
     await page.goto(storeSite + "/profile?cp=1");
+    console.log(storeSite + "/profile?cp=1");
     await page.waitForSelector(SMART_STORE_AVERAGE_AGE);
 
     let content = await page.content();

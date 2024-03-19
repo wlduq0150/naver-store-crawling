@@ -19,12 +19,16 @@ export const SMART_STORE_PAGE_LOADING =
 // 스마트스토어 상세 크롤링
 export const SMART_STORE_CATEGORY =
     "div > div > div.product_info_area__xxCTi > div.product_depth__I4SqY > span:nth-child(2)";
+export const SMART_STORE_CATEGORY_AD =
+    "div > div > div.adProduct_info_area__dTSZf > div.adProduct_depth__s_IUT > span:nth-child(2)";
 export const SMART_STORE_SITE =
     "div > div > div.product_mall_area___f3wo > div.product_mall_title__Xer1m > a.product_mall__hPiEH.linkAnchor";
 export const SMART_STORE_SITE_AD =
     "div > div > div.adProduct_mall_area__H952t > div.adProduct_mall_title__kk0Tr > a.adProduct_mall__zeLIC.linkAnchor";
 export const SMART_STORE_INFO_BTN =
     "div > div > div.product_mall_area___f3wo > div.product_mall_title__Xer1m > button";
+export const SMART_STORE_INFO_BTN_AD =
+    "div > div > div.adProduct_mall_area__H952t > div.adProduct_mall_title__kk0Tr > button";
 export const SMART_STORE_CLOSE_BTN = "#layer > button";
 export const SMART_STORE_SHOP_NAME = "#layer > div.layer_guide__QEEoL > div > strong";
 export const SMART_STORE_ADDRESS = "#layer > ul > li:nth-child(1) > div.layer_desc__B2VZd";

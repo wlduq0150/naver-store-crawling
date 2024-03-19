@@ -75,6 +75,9 @@ export class CrawlingService {
                     productIndex = 1;
                 }
 
+                console.log(pageIndex);
+                console.log(productIndex);
+
                 // 판매자 정보 크롤링
                 const sellerInfo = await crawlingSellerInfo(page, productIndex);
 
