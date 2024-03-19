@@ -7,7 +7,7 @@ import { ConfigService } from "@nestjs/config";
 import { naverPageLogin } from "./functions/crawling-naver-login.function";
 import { infiniteScroll } from "./functions/crawling-infinite-scroll.function";
 import { SMART_STORE_PAGE_LOADING } from "./constants/crawling-selector.constant";
-import { ISeller, SellerInfo } from "./interfaces/crawling.interface";
+import { ISeller, SellerDetail, SellerInfo } from "./interfaces/crawling.interface";
 import { CrawlingStoreOption } from "./dto/crawling-store-option.dto";
 import { Page } from "puppeteer";
 import { SellerService } from "src/seller/seller.service";
@@ -109,7 +109,7 @@ export class CrawlingService {
         return [pageIndex, productIndex];
     }
 
-    async updateSmartStore(id: number) {
+    async updateSmartStore(id: number): Promise<SellerDetail> {
         // DB에서 판매자 불러오기
         const store = await this.sellerService.findOneById(id);
 
@@ -126,6 +126,8 @@ export class CrawlingService {
 
         page.close();
         browser.close();
+
+        return sellerDetail;
     }
 
     // 상품 순서를 selector로 변환
