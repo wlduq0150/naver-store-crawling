@@ -16,9 +16,9 @@ export async function naverPageLogin(page: Page, id: string, pw: string) {
         // 1초동안 id, pw를 입력하기(매크로 방지 뚫기)
         await waitForSeconds(1);
         await page.click("#id");
-        await page.keyboard.type(id, { delay: 100 });
+        await page.keyboard.type(id, { delay: 1000 });
         await page.click("#pw");
-        await page.keyboard.type(pw, { delay: 100 });
+        await page.keyboard.type(pw, { delay: 1000 });
 
         // 로그인 버튼 클릭후 잠시 대기
         await page.click(NAVER_LOGIN_SUBMIT_BUTTON);
