@@ -64,6 +64,8 @@ export class CrawlingService {
                 await page.goto(pageUrl, { timeout: 5000 });
                 await page.waitForSelector(SMART_STORE_PAGE_LOADING);
 
+                console.log("여기까지");
+
                 // 무한 스크롤링 방지
                 await infiniteScroll(page);
 
@@ -117,7 +119,6 @@ export class CrawlingService {
 
         // 판매자 상세 데이터 크롤링
         const sellerDetail = await crawlingSellerDetail(page, store.storeSite);
-        console.log(sellerDetail);
 
         // 판매자 데이터 DB 업데이트
         this.sellerService.updateSeller(id, sellerDetail);
