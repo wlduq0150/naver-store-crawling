@@ -117,6 +117,7 @@ export class CrawlingService {
 
         // 판매자 상세 데이터 크롤링
         const sellerDetail = await crawlingSellerDetail(page, store.storeSite);
+        console.log(sellerDetail);
 
         // 판매자 데이터 DB 업데이트
         this.sellerService.updateSeller(id, sellerDetail);
