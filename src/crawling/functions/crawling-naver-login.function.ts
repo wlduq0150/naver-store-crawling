@@ -24,6 +24,8 @@ export async function naverPageLogin(page: Page, id: string, pw: string) {
         await page.click(NAVER_LOGIN_SUBMIT_BUTTON);
         await waitForSeconds(1);
 
+        console.log(page.url());
+
         // 홈페이지로 돌아와진다면 로그인 성공
         if (page.url() === NAVER_LOGIN_HOME_URL) {
             console.log("로그인 완료");

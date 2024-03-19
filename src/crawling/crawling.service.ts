@@ -24,6 +24,7 @@ export class CrawlingService {
 
         const browser = await puppeteer.launch({
             headless: process.env.NODE_ENV === "development" ? false : true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 
@@ -32,7 +33,7 @@ export class CrawlingService {
             width: CRAWLING_WIDTH,
             height: CRAWLING_HEIGHT,
         });
-        await page.setDefaultTimeout(10000);
+        page.setDefaultTimeout(3000);
 
         // 네이버 로그인(판매자 정보 크롤링을 위해 필요)
         const id = this.configService.get("NAVER_ID");
