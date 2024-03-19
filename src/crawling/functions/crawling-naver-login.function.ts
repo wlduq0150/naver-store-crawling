@@ -13,6 +13,8 @@ export async function naverPageLogin(page: Page, id: string, pw: string) {
         await page.goto(NAVER_LOGIN_HOME_URL);
         await waitForSeconds(1);
 
+        console.log(page.url());
+
         // 1초동안 id, pw를 입력하기(매크로 방지 뚫기)
         await waitForSeconds(1);
         await page.click("#id");
