@@ -1,6 +1,6 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
-@Table
+@Table({ tableName: "sellers", underscored: true })
 export class Seller extends Model {
     @Column({ type: DataType.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true })
     id: number;
@@ -9,29 +9,29 @@ export class Seller extends Model {
     category: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
-    shop_name: string;
+    shopName: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
-    company_name: string;
+    companyName: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     ceo: string;
 
     @Column({ type: DataType.STRING, allowNull: false, unique: true })
-    buisness_number: string;
+    buisnessNumber: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     address: string;
 
     @Column({ type: DataType.TEXT, allowNull: false })
-    store_site: string;
+    storeSite: string;
 
     @Column({ type: DataType.ENUM("male", "female"), allowNull: false })
-    prefered_gender: string;
+    preferedGender: string;
 
     @Column({ type: DataType.INTEGER, allowNull: false })
-    average_age: number;
+    averageAge: number;
 
     @Column({ type: DataType.INTEGER, allowNull: false })
-    customer_numbers: number;
+    customerNumbers: number;
 }

@@ -53,19 +53,19 @@ export async function crawlingSellerInfo(page: Page, productIndex: number): Prom
 
     // 판매자 정보 크롤링
     const category = parseCategoryFromContent(root, SMART_STORE_TARGET);
-    const store_site_default = parseStoreSiteFromContent(root, SMART_STORE_TARGET);
-    const store_site_ad = parseStoreSiteADFromContent(root, SMART_STORE_TARGET);
-    const store_site = await parseStoreSiteFromLink(page, store_site_default, store_site_ad);
-    const shop_name = parseShopNameFromContent(root);
+    const storeSiteDefault = parseStoreSiteFromContent(root, SMART_STORE_TARGET);
+    const storeSiteAd = parseStoreSiteADFromContent(root, SMART_STORE_TARGET);
+    const storeSite = await parseStoreSiteFromLink(page, storeSiteDefault, storeSiteAd);
+    const shopName = parseShopNameFromContent(root);
     const address = parseAddressFromContent(root);
-    const buisness_number = parseBusinessNumberFromContent(root);
+    const buisnessNumber = parseBusinessNumberFromContent(root);
 
     return {
-        shop_name,
+        shopName,
         category,
         address,
-        buisness_number,
-        store_site,
+        buisnessNumber,
+        storeSite,
     };
 }
 
@@ -77,9 +77,9 @@ function getSelectorForIndex(productIndex: number): string {
 // 쇼핑몰 이름 파싱
 function parseShopNameFromContent($: cheerio.Root): string {
     const target = $(SMART_STORE_SHOP_NAME);
-    const shop_name = target.text();
+    const shopName = target.text();
 
-    return shop_name;
+    return shopName;
 }
 
 // 회사 주소 파싱
@@ -93,9 +93,9 @@ function parseAddressFromContent($: cheerio.Root): string {
 // 회사 사업자등록번호 파싱
 function parseBusinessNumberFromContent($: cheerio.Root): string {
     const target = $(SMART_STORE_BUISNESS_NUMBER);
-    const buisness_number = target.text();
+    const buisnessNumber = target.text();
 
-    return buisness_number;
+    return buisnessNumber;
 }
 
 // 쇼핑몰 분류 파싱
@@ -110,17 +110,17 @@ function parseCategoryFromContent($: cheerio.Root, targetSelector: string): stri
 // 쇼핑몰 링크 default 파싱
 function parseStoreSiteFromContent($: cheerio.Root, targetSelector: string): string {
     const target = $(targetSelector + " > " + SMART_STORE_SITE);
-    const store_site_default = target.attr("href");
+    const storeSiteDefault = target.attr("href");
 
-    return store_site_default;
+    return storeSiteDefault;
 }
 
 // 쇼핑몰 링크 AD 파싱
 function parseStoreSiteADFromContent($: cheerio.Root, targetSelector: string): string {
     const target = $(targetSelector + " > " + SMART_STORE_SITE_AD);
-    const store_site_ad = target.attr("href");
+    const storeSiteAd = target.attr("href");
 
-    return store_site_ad;
+    return storeSiteAd;
 }
 
 // 쇼핑몰 링크 파싱
@@ -132,9 +132,9 @@ async function parseStoreSiteFromLink(
     const site = site_default ? site_default : site_ad;
 
     await page.goto(site, { timeout: 10000 });
-    const store_site = page.url().split("?").shift().split("/products").shift();
+    const storeSite = page.url().split("?").shift().split("/products").shift();
     await page.goBack();
     await page.waitForSelector(SMART_STORE_PAGE_LOADING);
 
-    return store_site;
+    return storeSite;
 }

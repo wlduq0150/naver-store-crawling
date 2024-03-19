@@ -85,11 +85,11 @@ export class CrawlingService {
                 if (!sellerInfo) continue;
 
                 // 스마트스토어가 아닌 경우 건너뛰기
-                const isSmartStore = this.checkIsSmartStore(sellerInfo.store_site);
+                const isSmartStore = this.checkIsSmartStore(sellerInfo.storeSite);
                 if (!isSmartStore) continue;
 
                 // 판매자 상세정보 크롤링
-                const sellerDetail = await crawlingSellerDetail(page, sellerInfo.store_site);
+                const sellerDetail = await crawlingSellerDetail(page, sellerInfo.storeSite);
                 const seller: ISeller = { ...sellerInfo, ...sellerDetail };
 
                 // 크롤링 데이터 저장
@@ -117,7 +117,7 @@ export class CrawlingService {
         const page = await browser.newPage();
 
         // 판매자 상세 데이터 크롤링
-        const sellerDetail = await crawlingSellerDetail(page, store.store_site);
+        const sellerDetail = await crawlingSellerDetail(page, store.storeSite);
 
         // 판매자 데이터 DB 업데이트
         this.sellerService.updateSeller(id, sellerDetail);

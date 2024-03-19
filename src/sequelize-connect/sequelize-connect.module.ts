@@ -29,7 +29,7 @@ export class SequelizeConnectModule {
                 password: configService.get<string>("DATABASE_PASSWORD"),
                 database: configService.get<string>("DATABASE_NAME"),
                 models: [Seller],
-                synchronize: true,
+                synchronize: process.env.NODE_ENV === "development" ? true : false,
                 logging: false,
             }),
             inject: [ConfigService],
