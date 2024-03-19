@@ -13,24 +13,19 @@ export async function naverPageLogin(page: Page, id: string, pw: string) {
         await page.goto(NAVER_LOGIN_HOME_URL);
         await waitForSeconds(1);
 
-        console.log(page.url());
-
         // 1초동안 id, pw를 입력하기(매크로 방지 뚫기)
         await waitForSeconds(1);
         await page.click("#id");
-        await page.keyboard.type(id, { delay: 1000 });
+        await page.keyboard.type(id, { delay: 100 });
         await page.click("#pw");
-        await page.keyboard.type(pw, { delay: 1000 });
+        await page.keyboard.type(pw, { delay: 100 });
 
         // 로그인 버튼 클릭후 잠시 대기
         await page.click(NAVER_LOGIN_SUBMIT_BUTTON);
         await waitForSeconds(1);
 
-        console.log(page.url());
-
         // 홈페이지로 돌아와진다면 로그인 성공
         if (page.url() === NAVER_LOGIN_HOME_URL) {
-            console.log("로그인 완료");
             return true;
         }
     } catch (e) {

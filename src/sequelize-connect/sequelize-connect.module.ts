@@ -7,17 +7,7 @@ import { Seller } from "src/seller/entities/seller.entity";
 // sequelize를 통한 DB 연결을 모듈화
 @Module({})
 export class SequelizeConnectModule {
-    constructor(private sequelize: Sequelize) {
-        sequelize
-            .sync()
-            .then(() => {
-                console.log("데이터베이스 연결 성공");
-            })
-            .catch((e) => {
-                console.error(e);
-                console.log("데이터베이스 연결 실패");
-            });
-    }
+    constructor(private sequelize: Sequelize) {}
 
     static forRoot(): DynamicModule {
         const sequelizeModule: DynamicModule = SequelizeModule.forRootAsync({
