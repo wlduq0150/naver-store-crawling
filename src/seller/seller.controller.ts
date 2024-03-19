@@ -11,24 +11,19 @@ export class SellerController {
         return this.sellerService.findAll();
     }
 
+    @Get("option")
+    findAllByOption(@Query() findOption: FindSellerByOptionDto) {
+        return this.sellerService.findAllByOption(findOption);
+    }
+
     @Get("categorys")
     findCategorys() {
         return this.sellerService.findAllCategorys();
     }
 
-    @Get("id/:id")
+    @Get(":id")
     findOneById(@Param("id") id: string) {
         return this.sellerService.findOneById(+id);
-    }
-
-    @Get("businessNumber/:bn")
-    findOneByBn(@Param("bn") business_number: string) {
-        return this.sellerService.findOneByBn(business_number);
-    }
-
-    @Get("option")
-    findAllByOption(@Query() findOption: FindSellerByOptionDto) {
-        return this.sellerService.findAllByOption(findOption);
     }
 
     @Delete(":id")

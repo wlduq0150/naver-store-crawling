@@ -24,7 +24,6 @@ export class CrawlingService {
 
         const browser = await puppeteer.launch({
             headless: process.env.NODE_ENV === "development" ? false : true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 
@@ -75,8 +74,8 @@ export class CrawlingService {
                     productIndex = 1;
                 }
 
-                console.log(pageIndex);
-                console.log(productIndex);
+                console.log("페이지: ", pageIndex);
+                console.log("위치: ", productIndex);
 
                 // 판매자 정보 크롤링
                 const sellerInfo = await crawlingSellerInfo(page, productIndex);
@@ -97,6 +96,7 @@ export class CrawlingService {
                 if (!result) continue;
 
                 cnt++;
+                console.log(`[진행도] ${cnt}개 크롤링 완료`);
             } catch (e) {
                 console.log(e);
                 continue;
@@ -112,7 +112,6 @@ export class CrawlingService {
 
         const browser = await puppeteer.launch({
             headless: process.env.NODE_ENV === "development" ? false : true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 

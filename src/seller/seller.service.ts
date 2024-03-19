@@ -19,8 +19,10 @@ export class SellerService {
         }
 
         // 이미 판매자 정보가 존재하는지 확인
-        const isAlreadyExist = await this.findOneByBn(seller.buisnessNumber);
-        if (isAlreadyExist) {
+        const isAlreadyExist = await this.findAllByOption({
+            buisnessNumber: seller.buisnessNumber,
+        });
+        if (isAlreadyExist.length) {
             console.log("이미 존재하는 판매자입니다.");
             return false;
         }
@@ -57,15 +59,6 @@ export class SellerService {
         });
     }
 
-    // 사업자등록번호로 조회
-    async findOneByBn(buisness_number: string) {
-        return await this.sellerRepository.findOne({
-            where: {
-                buisness_number,
-            },
-        });
-    }
-
     // 옵션으로 조회
     async findAllByOption(findOption: FindSellerByOptionDto) {
         const where: WhereOptions<any> = {};
@@ -73,34 +66,39 @@ export class SellerService {
 
         // 카테고리 아이디
         if ("catId" in findOption) {
-            where["category"] = findOption["catId"];
+            where["category"] = findOption.catId;
+        }
+
+        // 사업자 등록번호
+        if ("buisnessNumber" in findOption) {
+            where["buisnessNumber"] = findOption.buisnessNumber;
         }
 
         // 지역
         if ("region" in findOption) {
             where["address"] = {
-                [Op.like]: `%${findOption["region"]}%`,
+                [Op.like]: `%${findOption.region}%`,
             };
         }
 
         // 선호성별
-        if ("prefered_gender" in findOption) {
-            where["prefered_gender"] = findOption["prefered_gender"];
+        if ("preferedGender" in findOption) {
+            where["preferedGender"] = findOption.preferedGender;
         }
 
         // 연령대
-        if ("min_age" in findOption || "max_age" in findOption) {
-            where["average_age"] = {
+        if ("minAge" in findOption || "maxAge" in findOption) {
+            where["averageAge"] = {
                 [Op.and]: [
-                    { [Op.gte]: findOption["min_age"] ? +findOption["min_age"] : 0 },
-                    { [Op.lte]: findOption["max_age"] ? +findOption["max_age"] : 100 },
+                    { [Op.gte]: findOption.minAge ? +findOption.minAge : 0 },
+                    { [Op.lte]: findOption.maxAge ? +findOption.maxAge : 100 },
                 ],
             };
         }
 
         // 관심 고객 수 기준 정렬
-        if ("sort_by_customers" in findOption) {
-            order.push(["customer_numbers", findOption["sort_by_customers"]]);
+        if ("sortByCustomers" in findOption) {
+            order.push(["customerNumbers", findOption.sortByCustomers]);
         }
 
         const sellers = await this.sellerRepository.findAll({ where, order });
